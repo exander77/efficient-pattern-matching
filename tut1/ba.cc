@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -6,11 +5,14 @@
 /*
  * Border Array construction.
  * Complexity: O(n).
+ *
+ * Usage: ./csc [STRING]
  */
 
 int* borderarray(char* x, int n) {
-  int* ba = (int *)malloc(sizeof(int)*n+1);
   int i=0, j=-1;
+  int* ba = (int *)malloc(sizeof(int)*n+1);
+  
   ba[i]=j;
   while (i<n)
   {
@@ -22,7 +24,7 @@ int* borderarray(char* x, int n) {
 }
 
 int main (int argc, char *argv[]) {
-  if (argc < 2) return 1;
+  if (argc < 2) return EXIT_FAILURE;
 
   int n = strlen(argv[1]);
   printf("Length: %3u\n", n);
@@ -39,7 +41,7 @@ int main (int argc, char *argv[]) {
   printf("\n");
   free(ba);  
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 // vim: ts=2 fdm=marker syntax=cpp expandtab sw=2
