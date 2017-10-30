@@ -10,8 +10,10 @@
  * Forward matching algorithm.
  *
  * Usage: ./morris_pratt [STRING] [PATTERN]
- * Author: Jakub Kulik
+ * Author: Radomír Polách, Jakub Kulik
  */
+
+char fillers[1024];
 
 inline int* border_array(char* str, int size) {
   int i, b, *ba;
@@ -41,33 +43,64 @@ inline int* mp_function(int* ba, int size) {
 inline void morris_pratt(int* kmp, char* string, char* pattern, int size, int psize) {
   int i, j;
 
+  printf("%s\n", string);
   for (i = 0, j = 0; i < size; i++) {
+    //printf("Comparing string[%d] with pattern[%d].\n", i, j);
     if (string[i] == pattern[j]) {
-      if ((++j) == psize) 
-        printf("%d\n", i-j+1);
+      printf("%c", pattern[j]);
+      if (++j == psize) 
+        printf("%*c  match on position %d", size-i, ' ', i-j+1);
     } else {
       i -= (bool)(kmp[j]);
+      printf("%c\n", pattern[j]);
       j = (kmp[j]) ? kmp[j]-1: 0;
+      printf("%*c%.*s", i+1-j, ' ', j, fillers);
     }
   }
+  printf("\n");
 }
 
+inline void print_table(int* ba, int* kmp, char* str, int size) {
+  int i;
+  
+  printf("\nIndex:  ");
+  for (i = 0; i < size; i++)
+    printf(" %2d", i);
+
+  printf("\nString:  ");
+  for (i = 0; i < size; i++)
+    printf("%2c ", str[i]);
+
+  printf("\nBorder:  ");
+  for (i = 1; i <= size; i++)
+    printf("%2d ", ba[i]);
+
+  printf("\nMP:      ");
+  for (i = 0; i <= size; i++)
+    printf("%2d ", kmp[i]);
+  printf("\n");  
+}
 
 int main(int argc, char **argv) {
   int psize, size;
   int *ba, *mp;
 
   if (argc < 3) return EXIT_FAILURE;
+  memset(fillers, (int)'?', 1024);
 
   size = strlen(argv[1]);
   psize = strlen(argv[2]);
 
   ba = border_array(argv[2], psize);
   mp = mp_function(ba, psize);
+  printf("Preprocessing:\n");
+  print_table(ba, mp, argv[2], psize);
+  printf("\nProcessing:\n");
 
   morris_pratt(mp, argv[1], argv[2], size, psize);
 
   free(ba);
   free(mp);
+
   return EXIT_SUCCESS;
 }
