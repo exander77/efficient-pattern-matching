@@ -1,5 +1,5 @@
 CPP=g++
-CXXFLAGS=-std=c++11
+CXXFLAGS=-std=c++1z
 SRC=${shell ls */*.cc 2> /dev/null | xargs}
 
 .PHONY: bin dist-clean
