@@ -1,13 +1,19 @@
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include <iostream>
 #include <iomanip>
-
-#include <stdio.h>
-#include <string.h>
 #include <limits>
 #include <iostream>
 #include <map>
 #include <set>
+
+/*
+ * Suffix Tree construction.
+ * Complexity: O(n).
+ *
+ * Usage: ./st [STRING]$
+ */
 
 class SuffixTree {
   private:
@@ -60,7 +66,6 @@ void SuffixTree::printNode(std::ostream& os, const Node* node, const size_t offs
 {
   size_t length = 1;
   if (node != root) {
-    //os << std::dec << std::setw(4) << std::setfill(' ') << (node->start) << ' ' << std::setw(4) << std::setfill(' ') << (node->suffixIndex);
     size_t i;
     for (i = 0; i < offset; ++i) {
       if (links.find(i) == links.end()) {
@@ -79,7 +84,6 @@ void SuffixTree::printNode(std::ostream& os, const Node* node, const size_t offs
     for (size_t i = node->start; i < node->start + (length = getLength(node)); ++i) {
       os << T[i];
     }
-    //os << '@';
     if (node == active) os << u8" ←";
     if (node->children.begin() == node->children.end()) {
       os << " (" << node->suffixIndex << ")";
@@ -87,20 +91,13 @@ void SuffixTree::printNode(std::ostream& os, const Node* node, const size_t offs
       os << " (" << node->suffixIndex << ")?";
     }
   } else {
-    os << /*std::setw(10) <<*/ " ε";
+    os << " ε";
   }
-  //for (auto &kv : node->children) {
-    //Node* child = kv.second;
   os << std::endl;
   for (auto i = node->children.begin(); i != node->children.end();) {
     Node* child = (*i).second;
-    //char c = (*i).first;
-    //os << "(" << c << ") ";
     printNode(os, child, offset + length, links, ++i == node->children.end());
-    //os << std::endl;
   }
-
-  //os << std::endl;
 }
 
 SuffixTree::SuffixTree(const char* aT)
@@ -126,27 +123,36 @@ SuffixTree::Node* SuffixTree::newNode(size_t start, size_t suffixIndex, size_t e
 
 void SuffixTree::prolong(size_t j) {
   for (;index<j;++index) {
-    //Získám znak c z textu T na indexu index
+    //Získám znak c z textu T na indexu index.
+    //Get character c from text T on index index.
     char c = T[index];
-    //Resetuju suffix link
+    //Resetuju suffix link.
+    //Reset suffix link.
     suffixLink = NULL;
-    //Inkrementuju remainder
+    //Inkrementuju remainder.
+    //Increment remainder.
     remainder++;                                                
     while (remainder > 0) {                                    
-      //Resetuju aktivní hranu, pokud není nastavena aktivní délka
+      //Resetuju aktivní hranu, pokud není nastavena aktivní délka.
+      //Reset active edge if active length not set.
       if (!activeLength) activeEdge = index;                
-      //Zkusím najít hranu vedoucí z aktivního uzlu pro daný symbol
+      //Zkusím najít hranu vedoucí z aktivního uzlu pro daný symbol.
+      //Try finding edge leading from active node for a given symbol.
       auto got = active->children.find(T[activeEdge]);
       //Hrana neexistuje
       if (got == active->children.end()) { 
-        //Vytvořím nový uzel
+        //Vytvořím nový uzel.
+        //Create new node.
         active->children.insert(std::make_pair(T[activeEdge], newNode(index, index - remainder + 1)));
-        //Upravím suffix link
+        //Uprav suffix link.
+        //Modify suffix link.
         if (suffixLink) suffixLink->suffixLink = active;
         suffixLink = active;
-      //Hrana existuje
+      //Hrana existuje.
+      //Edge exists.
       } else {        
-        //Vytáhnu si ji
+        //Získej hrani.
+        //Get the edge.
         Node* next = got->second; 
         size_t length = getLength(next);                    
         if (activeLength >= length) {                      
@@ -157,22 +163,28 @@ void SuffixTree::prolong(size_t j) {
         }
         if (T[next->start + activeLength] == c) {
           activeLength++;
-          //Upravím suffix link
+          //Uprav suffix link.
+          //Modify suffix link.
           if (suffixLink) suffixLink->suffixLink = active;
           suffixLink = active;
           break;
         }
-        //Vytvořím uzel pro první část
+        //Vytvoř uzel pro první část-
+        //Create node for the first part.
         Node* split = newNode(next->start, next->start, next->start + activeLength);
-        //Nahradím jím aktuální uzel
+        //Nahraď jím aktuální uzel.
+        //Replace current node with created node.
         got->second = split;
-        //Z nového uzlu vytvořím větvení na nový znak a uložím si ho
+        //Z nového uzlu vytvořím větvení na nový znak a uložím si ho.
+        //Create fork from new node to a new character and save it.
         split->children.insert(std::make_pair(c, newNode(index, index - remainder + 1)));
         //Zároveň vezmu starý uzel a posunuho do rozdělovací pozice
         next->start += activeLength;
-        //Nastavím ho tam
+        //Nastavím ho tam.
+        //Set it.
         split->children.insert(std::make_pair(T[next->start], next));
-        //Upravím suffix link
+        //Modify suffix link.
+        //Uprav suffix link.
         if (suffixLink) suffixLink->suffixLink = split;
         suffixLink = split;
       }
@@ -184,7 +196,6 @@ void SuffixTree::prolong(size_t j) {
         active = active->suffixLink ? active->suffixLink : root;
       }
     }
-    //std::cout << "(" << activeEdge << ", " << activeLength << ", " << remainder << ")" << std::endl;  
   }
 }
 
@@ -205,3 +216,5 @@ int main(int argc, char *argv[])
   std::cout << std::endl;
   return EXIT_SUCCESS;
 }
+
+// vim: ts=2 fdm=marker syntax=cpp expandtab sw=2
