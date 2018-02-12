@@ -6,6 +6,23 @@
 #define max(x,y)      (((x) > (y)) ? (x) : (y))
 #define max3(x,y,z) (((x) > max(y,z)) ? (x) : max(y,z))
 
+/*
+ * Needleman-Wunsch
+ * Complexity: O(nm).
+ *
+ * Usage: ./nw text1 text2 table_file
+ * Author: Radomír Polách
+ *
+ * table_file format:
+ * 4
+ * a g c t
+ * 10 -1 -3 -4
+ * -1 7 -5 -3
+ * -3 -5 9 0
+ * -4 -3 0 8
+ * -5
+ */
+
 typedef struct {
   char* alphabet;
   int** sub;

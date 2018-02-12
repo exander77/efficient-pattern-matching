@@ -6,6 +6,14 @@
 #define max(x,y)      (((x) > (y)) ? (x) : (y))
 #define min3(x,y,z) (((x) < min(y,z)) ? (x) : min(y,z))
 
+/*
+ * Levensthein Distance
+ * Complexity: O(nm).
+ *
+ * Usage: ./levensthein text1 text2
+ * Author: Radomír Polách
+ */
+
 int levensthein(char* t, size_t n, char* p, size_t m) {
   if (n == 0) return m;
   if (m == 0) return n;

@@ -6,6 +6,24 @@
 #define max(x,y)      (((x) > (y)) ? (x) : (y))
 #define min3(x,y,z) (((x) < min(y,z)) ? (x) : min(y,z))
 
+/*
+ * Weighted Edit Distance
+ * Complexity: O(nm).
+ *
+ * Usage: ./wed text1 text2 table_file
+ * Author: Radomír Polách
+ *
+ * table_file format:
+ * 4
+ * a g c t
+ * 0 1 2 3
+ * 2 0 5 2
+ * 2 5 0 0
+ * 3 2 0 0
+ * 7 10 8 9
+ * 10 7 9 8
+ */
+
 typedef struct {
   char* alphabet;
   int** rep;
