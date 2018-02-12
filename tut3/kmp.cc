@@ -63,7 +63,7 @@ inline void knutt_morris_pratt(int* kmp, char* string, char* pattern, int size, 
     } else {
       i -= (bool)(kmp[j]);
       printf("%c\n", pattern[j]);
-      j = (kmp[j]) ? kmp[j]-1: 0;
+      j = kmp[j] ? kmp[j]-1: 0;
       printf("%*c%.*s", i+1-j, ' ', j, fillers);
     }
   }

@@ -65,7 +65,7 @@ inline void boyer_moore_horspool(char* string, char* pattern, int size, int psiz
       }
     }
     if (j == psize) {
-      printf("%*.s%.*s%.*s", i-psize+1, spaces, psize-j, fillers, j, string+psize-j);
+      printf("%*.s%.*s%.*s", i-psize+1, spaces, psize-j, fillers, j, pattern+psize-j);
       printf("%*c  match on position %d\n", size-i, ' ', i-j+1);
     } else {
       printf("%*.s%.*s%.*s", i-psize+1, spaces, psize-j-1, fillers, j+1, pattern+psize-j-1);

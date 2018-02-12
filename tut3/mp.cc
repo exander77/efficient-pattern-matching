@@ -40,7 +40,7 @@ inline int* mp_function(int* ba, int size) {
   return mp;
 }
 
-inline void morris_pratt(int* kmp, char* string, char* pattern, int size, int psize) {
+inline void morris_pratt(int* mp, char* string, char* pattern, int size, int psize) {
   int i, j;
 
   printf("%s\n", string);
@@ -51,9 +51,9 @@ inline void morris_pratt(int* kmp, char* string, char* pattern, int size, int ps
       if (++j == psize) 
         printf("%*c  match on position %d", size-i, ' ', i-j+1);
     } else {
-      i -= (bool)(kmp[j]);
+      i -= (bool)(mp[j]);
       printf("%c\n", pattern[j]);
-      j = (kmp[j]) ? kmp[j]-1: 0;
+      j = mp[j] ? mp[j]-1: 0;
       printf("%*c%.*s", i+1-j, ' ', j, fillers);
     }
   }
