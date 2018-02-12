@@ -72,7 +72,7 @@ inline void print_table(int* ba, int* kmp, char* str, int size) {
     printf("%2c ", str[i]);
 
   printf("\nBorder:  ");
-  for (i = 1; i <= size; i++)
+  for (i = 0; i < size; i++)
     printf("%2d ", ba[i]);
 
   printf("\nMP:      ");
