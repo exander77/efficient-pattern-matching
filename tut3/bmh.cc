@@ -22,7 +22,7 @@ int* calc_table(char* pattern, int size) {
 
   for (i = 0; i < SYMBOL_AMOUNT; i++)
     table[i] = size;
-  for (i = 0; i < (size-1); i++)
+  for (i = 0; i < size-1; i++)
     table[pattern[i]] = size - i - 1;
 
   return table;

@@ -6,7 +6,7 @@
  * Border Array construction.
  * Complexity: O(n).
  *
- * Usage: ./csc [STRING]
+ * Usage: ./ba [STRING]
  */
 
 int* borderarray(char* x, int n) {
