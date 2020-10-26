@@ -8,7 +8,7 @@
  * Complexity: O(n*m).
  * Forward matching algorithm.
  *
- * Usage: ./karp_rabin [STRING] [PATTERN]
+ * Usage: ./kr [STRING] [PATTERN]
  * Author: Jakub Kulik
  */
 
