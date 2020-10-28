@@ -8,7 +8,7 @@
  * Forward matching algorithm.
  *
  * Usage: ./naive_matching [STRING] [PATTERN]
- * Author: Jakub Kulik
+ * Author: Radomír Polách
  */
 
 inline void naive(char* string, char* pattern, int size, int psize) {
@@ -21,7 +21,7 @@ inline void naive(char* string, char* pattern, int size, int psize) {
       if (string[i+j] == pattern[j]) {
         printf("%c", pattern[j]);
         if (j+1 == psize) {
-	  printf("%*c  match on position %d", size-i, ' ', i);
+          printf("%*c  match on position %d", size-i, ' ', i);
           printf("\n%*c", i+1, ' ');
           break;
         }
