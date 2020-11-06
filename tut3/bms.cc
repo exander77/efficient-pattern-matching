@@ -43,7 +43,7 @@ inline void print_table(int* bcs, int size) {
     if (bcs[i] != size + 1)
       printf("%3d ", bcs[i]);
   
-  printf("%3d ", size);
+  printf("%3d ", size + 1);
 
   printf("\n");  
 }
