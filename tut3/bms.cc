@@ -21,7 +21,7 @@ int* calc_table(char* pattern, int size) {
   int *table = (int*) malloc (SYMBOL_AMOUNT * sizeof(int));
 
   for (i = 0; i < SYMBOL_AMOUNT; i++)
-    table[i] = size;
+    table[i] = size + 1;
   for (i = 0; i < size; i++)
     table[pattern[i]] = size - i;
 
@@ -33,14 +33,14 @@ inline void print_table(int* bcs, int size) {
   
   printf("\nIndex:  ");
   for (i = 0; i < SYMBOL_AMOUNT; i++)
-    if (bcs[i] != size)
+    if (bcs[i] != size + 1)
       printf(" %3d", i);
 
   printf(" ???");
 
   printf("\nBCS:     ");
   for (i = 0; i < SYMBOL_AMOUNT; i++)
-    if (bcs[i] != size)
+    if (bcs[i] != size + 1)
       printf("%3d ", bcs[i]);
   
   printf("%3d ", size);
@@ -57,7 +57,7 @@ inline void boyer_moore_sunday(char* string, char* pattern, int size, int psize)
 
   printf("\nProcessing:\n");
   printf("%s\n", string);
-  for (i = psize - 1; i < size; i += i+1 < size ? table[string[i+1]]+1 : 1) {
+  for (i = psize - 1; i < size; i += i+1 < size ? table[string[i+1]] : 1) {
     j = 0;
     while (string[i-j] == pattern[psize-1-j]) {
       if ((++j) == psize) {
