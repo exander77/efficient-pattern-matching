@@ -19,7 +19,7 @@ class SuffixTree {
   private:
     class ComparatorChar {
       public:
-        bool operator()(const char x, const char y) { return x<y; };
+        bool operator()(const char x, const char y) const { return x<y; };
     };
     class Node {
       public:
