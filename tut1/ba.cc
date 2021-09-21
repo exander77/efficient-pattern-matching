@@ -11,7 +11,7 @@
 
 int* borderarray(char* x, int n) {
   int i=0, j=-1;
-  int* ba = (int *)malloc(sizeof(int)*n+1);
+  int* ba = (int *)malloc(sizeof(int)*(n+1));
   
   ba[i]=j;
   while (i<n)
