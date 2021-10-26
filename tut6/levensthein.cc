@@ -11,7 +11,7 @@
  * Complexity: O(nm).
  *
  * Usage: ./levensthein text1 text2
- * Author: Radomír Polách
+ * Author: Radomir Polach
  */
 
 int levensthein(char* t, size_t n, char* p, size_t m) {

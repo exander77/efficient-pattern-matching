@@ -11,7 +11,7 @@
  * Complexity: O(nm).
  *
  * Usage: ./wed text1 text2 table_file
- * Author: Radomír Polách
+ * Author: Radomir Polach
  *
  * table_file format:
  * 4
@@ -79,7 +79,7 @@ int load(table_t* table, char* name) {
   return 0;
 }
 
-int unload(table_t* table) {
+void unload(table_t* table) {
   free(table->alphabet);
   free(table->rep);
   free(table->ins);
