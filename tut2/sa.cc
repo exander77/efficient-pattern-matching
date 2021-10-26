@@ -72,16 +72,16 @@ void suffixArray(int* s, int* SA, int n, int K) {
     int i = GetI(); // pos of current offset 12 suffix
     int j = SA0[p]; // pos of current offset 0 suffix
     if (SA12[t] < n0 ? // different compares for mod 1 and mod 2 suffixes
-	leq(s[i], s12[SA12[t] + n0], s[j], s12[j/3]) :
-	leq(s[i],s[i+1],s12[SA12[t]-n0+1], s[j],s[j+1],s12[j/3+n0]))
+  leq(s[i], s12[SA12[t] + n0], s[j], s12[j/3]) :
+  leq(s[i],s[i+1],s12[SA12[t]-n0+1], s[j],s[j+1],s12[j/3+n0]))
       {// suffix from SA12 is smaller
-	SA[k] = i; t++;
-	if (t == n02) // done --- only SA0 suffixes left
-	  for (k++; p < n0; p++, k++) SA[k] = SA0[p];
+  SA[k] = i; t++;
+  if (t == n02) // done --- only SA0 suffixes left
+    for (k++; p < n0; p++, k++) SA[k] = SA0[p];
       } else {// suffix from SA0 is smaller
       SA[k] = j; p++;
       if (p == n0) // done --- only SA12 suffixes left
-	for (k++; t < n02; t++, k++) SA[k] = GetI();
+  for (k++; t < n02; t++, k++) SA[k] = GetI();
     }
   }
   delete [] s12; delete [] SA12; delete [] SA0; delete [] s0;
@@ -104,23 +104,23 @@ int* suffixArray(unsigned char* s, int n) {
 }
 
 int* lcpArray(unsigned char *s, int n, int* sa) {
-	int *lcp = new int[n];
-	int *rank = new int[n];
+  int *lcp = new int[n];
+  int *rank = new int[n];
 
-	lcp[0] = 0;
-	for (int i = 0; i < n; ++i)
-		rank[sa[i]] = i;
+  lcp[0] = 0;
+  for (int i = 0; i < n; ++i)
+    rank[sa[i]] = i;
 
-	int h = 0;
-	for (int i = 0; i < n; ++i)
-		if (rank[i] > 0) {
-			int j = sa[rank[i]-1];
+  int h = 0;
+  for (int i = 0; i < n; ++i)
+    if (rank[i] > 0) {
+      int j = sa[rank[i]-1];
 
-			while (s[i+h] == s[j+h]) h++;
-			lcp[rank[i]] = h;
-			if(h > 0) h--;
-		}
-	return lcp;
+      while (s[i+h] == s[j+h]) h++;
+      lcp[rank[i]] = h;
+      if(h > 0) h--;
+    }
+  return lcp;
 }
 
 
@@ -131,7 +131,7 @@ int main (int argc, char *argv[]) {
     int n = strlen(s);
     printf("Length: %3u\n", n);
     printf("Index:  ");
-		for (int i=0;i<n;++i) {
+    for (int i=0;i<n;++i) {
         printf("%3i ", i);
     }
     printf("\n");
