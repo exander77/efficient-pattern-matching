@@ -3,8 +3,9 @@
 #include <set>
 #include <iostream>
 
-//suffix automaton construction in O(n * log |Σ|) time
-//Author : Michal Dvořák (dvora125)
+// Suffix Automaton Construction.
+// Complexity: O(n * log |Σ|).
+// Author: Michal Dvořák (dvora125)
 
 struct state
 {
