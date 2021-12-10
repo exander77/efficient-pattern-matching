@@ -35,7 +35,7 @@ int levensthein(char* ts, char* ps, char* te, char* pe, cell_t **table, size_t *
   // calculate levensthein distance including backtrace information
   for (int i=0; i<n; ++i, ++cell) { cell->source = DELETE; cell->value = i; }    // wrong for cell 0
   cell_t *left = cell - 1, *up = cell - n, *upleft = up - 1;                     // setup source cells
-  up->source = END;                                                              // fix cell 0z
+  up->source = END;                                                              // fix cell 0
   for (int i=n, row=0, col; i<size; ++i, ++cell, ++left, ++up, ++upleft) {
     cell->source = (col=i%n) && ts[col-1] == ps[row-1] ? INSERT | MATCH : INSERT;
     cell->value = col ? imin3(up->value+1, left->value+1, upleft->value + (cell->source < MATCH), &cell->source) : ++row;
